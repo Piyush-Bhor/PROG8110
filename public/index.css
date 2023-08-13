@@ -35,3 +35,7 @@
 #tab2{
     min-height:75vh;
 }
+
+.purchased {
+    text-decoration: line-through;
+}

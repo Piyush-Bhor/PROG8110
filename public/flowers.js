@@ -16,11 +16,12 @@ $$("#tab2").on("tab:show", () => {
         for(let n = 0; n < aKeys.length; n++){
             let sCard = `
             <div class="card">
-                <div class="card-content card-content-padding">
+                <div class="card-content card-content-padding ${oItems[aKeys[n]].datePurchased ? 'purchased' : ''}">
                     <p>Flower: ${oItems[aKeys[n]].item}</p>
                     <p>Store: ${oItems[aKeys[n]].store}</p>
                 </div>
                 <div class="card-footer">
+                    <button class="button bought-button" data-key="${aKeys[n]}">Purchased Before</button>
                     <button class="button delete-button" data-key="${aKeys[n]}">Delete</button>
                 </div>
             </div>
@@ -29,11 +30,22 @@ $$("#tab2").on("tab:show", () => {
         }
     });
 
-    // To delete the card
+    // To mark item as purchased
+    $$("#flowersList").on("click", ".bought-button", function() {
+        const keyToUpdate = $$(this).data("key");
+        if (keyToUpdate) {
+            const sUser = firebase.auth().currentUser.uid;
+            firebase.database().ref("flowers/" + sUser + "/" + keyToUpdate).update({
+                datePurchased: new Date().toISOString()
+            }).catch((error) => {
+                console.error("Error updating data: ", error);
+            });
+        }
+    });
+
+    // To delete the item
     $$("#flowersList").on("click", ".delete-button", function() {
-        console.log("clicked");
         const keyToDelete = $$(this).data("key");
-        console.log(keyToDelete);
         if (keyToDelete) {
             const sUser = firebase.auth().currentUser.uid;
             firebase.database().ref("flowers/" + sUser + "/" + keyToDelete).remove().catch((error) => {
@@ -42,6 +54,7 @@ $$("#tab2").on("tab:show", () => {
         }
     });
 });
+
 
 $$(".my-sheet").on("submit", e => {
     //submitting a new note
