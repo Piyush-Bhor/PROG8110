@@ -22,8 +22,8 @@ $$("#tab2").on("tab:show", () => {
                     <p><img src="${oItems[aKeys[n]].imgUrl}" alt="${oItems[aKeys[n]].title}"</p>
                 </div>
                 <div class="card-footer">
-                    <button class="button bought-button" data-key="${aKeys[n]}">Purchased Before</button>
-                    <button class="button delete-button" data-key="${aKeys[n]}">Delete</button>
+                    <button class="button bought-button" data-key="${aKeys[n]}">I bought this</button>
+                    <button class="button delete-button" data-key="${aKeys[n]}">I don't need this</button>
                 </div>
             </div>
             `
