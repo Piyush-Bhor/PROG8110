@@ -5,12 +5,11 @@ import "https://cdnjs.cloudflare.com/ajax/libs/firebase/7.16.1/firebase-auth.min
 import config from "./firebase.js";
 import app from "./F7App.js";
 import "./flowers.js";
-import "https://cdnjs.cloudflare.com/ajax/libs/firebase/7.16.1/firebase-firestore.min.js";
 
 firebase.initializeApp(config);
 const $$ = Dom7;
 
-const firestore = firebase.firestore();
+const database = firebase.database();
 
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
