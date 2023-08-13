@@ -16,13 +16,31 @@ $$("#tab2").on("tab:show", () => {
         for(let n = 0; n < aKeys.length; n++){
             let sCard = `
             <div class="card">
-            <div class="card-content card-content-padding">${oItems[aKeys[n]].item}</div>
+                <div class="card-content card-content-padding">
+                    <p>Flower: ${oItems[aKeys[n]].item}</p>
+                    <p>Store: ${oItems[aKeys[n]].store}</p>
+                </div>
+                <div class="card-footer">
+                    <button class="button delete-button" data-key="${aKeys[n]}">Delete</button>
+                </div>
             </div>
             `
             $$("#flowersList").append(sCard);
         }
     });
 
+    // To delete the card
+    $$("#flowersList").on("click", ".delete-button", function() {
+        console.log("clicked");
+        const keyToDelete = $$(this).data("key");
+        console.log(keyToDelete);
+        if (keyToDelete) {
+            const sUser = firebase.auth().currentUser.uid;
+            firebase.database().ref("flowers/" + sUser + "/" + keyToDelete).remove().catch((error) => {
+                console.error("Error deleting data: ", error);
+            });
+        }
+    });
 });
 
 $$(".my-sheet").on("submit", e => {
