@@ -73,6 +73,24 @@ $$("#logout").on("click", () => {
 $$("#googleLogin").on("click", () => {
     firebase.auth().signInWithPopup(provider)
     .then((result) => {
+        
+        app.loginScreen.close(".loginYes", true);
+            
+        var credential = result.credential;
+        var token = credential.accessToken;
+        var user = result.user;
+    }).catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        var email = error.email;
+        var credential = error.credential;
+    });
+}); 
+
+$$("#googleSignup").on("click", () => {
+    firebase.auth().signInWithPopup(provider)
+    .then((result) => {
+        app.loginScreen.close(".signupYes", true);
       var credential = result.credential;
       var token = credential.accessToken;
       var user = result.user;
