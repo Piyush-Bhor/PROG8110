@@ -5,12 +5,17 @@
     line-height: 2em;
 }
 
+.google-button{
+    width: 20em;
+    margin:0 auto;
+}
+
 #magic button{
     background-color: blue;
 }
 
 #loginSignin{
-    width: 12em;
+    width: 20em;
 }
 
 #logout{

@@ -13,12 +13,13 @@ $$("#tab2").on("tab:show", () => {
         const oItems = snapshot.val();
         const aKeys = Object.keys(oItems);
         $$("#flowersList").html("");
-        for(let n = 0; n < aKeys.length; n++){
-            let sCard = `
+        for(let n = 0; n < aKeys.length; n++){ 
+           let sCard = `
             <div class="card">
                 <div class="card-content card-content-padding ${oItems[aKeys[n]].datePurchased ? 'purchased' : ''}">
                     <p>Flower: ${oItems[aKeys[n]].item}</p>
                     <p>Store: ${oItems[aKeys[n]].store}</p>
+                    <p><img src="${oItems[aKeys[n]].imgUrl}" alt="${oItems[aKeys[n]].title}"</p>
                 </div>
                 <div class="card-footer">
                     <button class="button bought-button" data-key="${aKeys[n]}">Purchased Before</button>
@@ -53,8 +54,8 @@ $$("#tab2").on("tab:show", () => {
             });
         }
     });
-});
 
+});
 
 $$(".my-sheet").on("submit", e => {
     //submitting a new note

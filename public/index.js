@@ -10,6 +10,8 @@ firebase.initializeApp(config);
 const $$ = Dom7;
 
 const database = firebase.database();
+var provider = new firebase.auth.GoogleAuthProvider();
+
 
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -67,3 +69,17 @@ $$("#logout").on("click", () => {
         // An error happened.
     });
 });
+
+$$("#googleLogin").on("click", () => {
+    firebase.auth().signInWithPopup(provider)
+    .then((result) => {
+      var credential = result.credential;
+      var token = credential.accessToken;
+      var user = result.user;
+    }).catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      var email = error.email;
+      var credential = error.credential;
+    });
+}); 
